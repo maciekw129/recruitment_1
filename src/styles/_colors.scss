@@ -1,0 +1,34 @@
+$palettes: (
+  primary: (
+    100: #fdf2d2,
+    200: #fbe4a1,
+    300: #f9d670,
+    400: #f6c840,
+    500: #f4ba0f,
+    600: #c79609
+  ),
+  secondary: (
+    100: #60d5ff,
+    200: #2dc7ff,
+    300: #00b7f9,
+    400: #0091c6,
+    500: #006c93,
+    600: #00212d
+  ),
+  gray: (
+    100: #f2f2f2,
+    200: #d9d9d9,
+    300: #bfbfbf,
+    400: #a6a6a6,
+    500: #8c8c8c,
+    600: #737373
+  )
+);
+
+@mixin initialize-palettes($palettes) {
+  @each $name, $palette in $palettes {
+    @each $key, $value in $palette {
+      #{"--" + $name + "-color-" + $key}: #{$value};
+    }
+  }
+}

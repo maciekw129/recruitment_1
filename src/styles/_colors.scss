@@ -25,7 +25,7 @@ $palettes: (
   )
 );
 
-@mixin initialize-palettes($palettes) {
+@mixin initialize-palettes() {
   @each $name, $palette in $palettes {
     @each $key, $value in $palette {
       #{"--" + $name + "-color-" + $key}: #{$value};

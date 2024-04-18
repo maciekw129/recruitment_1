@@ -1,8 +1,14 @@
 @use 'styles/colors';
 @use 'styles/typography';
+@use 'styles/utils';
+@use 'styles/spacing' with (
+  $levels: 5,
+  $multiplier: 4
+);
 
 :root {
-  @include colors.initialize-palettes(colors.$palettes)
+  @include colors.initialize-palettes();
+  @include spacing.initialize-spacing();
 }
 
 * {
@@ -10,3 +16,6 @@
   margin: 0;
   padding: 0;
 }
+
+
+

@@ -7,18 +7,24 @@
     </tr>
   </thead>
   <tbody>
-    @for (row of dataSource(); track row) {
-      <tr class="table__row">
-        @for (column of columns(); track column) {
-          <td class="table__data">
-            @if (customCells()[column.property]; as customCellTemplate) {
-              <ng-container [ngTemplateOutlet]="customCellTemplate" [ngTemplateOutletContext]="{row: row}"/>
-            } @else {
-              {{row[column.property]}}
+    @if ({columns: columns(), dataSource: dataSource()}; as data) {
+      @if (data.dataSource.length > 0) {
+        @for (row of data.dataSource; track row) {
+          <tr class="table__row">
+            @for (column of data.columns; track column) {
+              <td class="table__data">
+                @if (customCells()[column.property]; as customCellTemplate) {
+                  <ng-container [ngTemplateOutlet]="customCellTemplate" [ngTemplateOutletContext]="{row: row}"/>
+                } @else {
+                  {{row[column.property]}}
+                }
+              </td>
             }
-          </td>
+          </tr>
         }
-      </tr>
+      } @else {
+        <td [attr.colspan]="data.columns.length" class="table__empty-text">Brak danych</td>
+      }
     }
   </tbody>
 </table>

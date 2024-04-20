@@ -1,0 +1,15 @@
+.table {
+  border-collapse: collapse;
+
+  &__data, &__heading {
+    border: 1px solid var(--gray-color-100);
+    padding: var(--space-3);
+    border-collapse: collapse;
+  }
+
+  &__heading {
+    background-color: var(--gray-color-200);
+    text-transform: uppercase;
+
+  }
+}

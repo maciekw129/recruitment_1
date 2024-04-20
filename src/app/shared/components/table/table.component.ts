@@ -1,11 +1,9 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ContentChildren,
+  computed,
+  contentChildren,
   input,
-  QueryList,
-  signal
 } from '@angular/core';
 import {CustomCells, TableColumn} from "./table.model";
 import {TableColumnCellDirective} from "./table-column-cell.directive";
@@ -21,20 +19,16 @@ import {NgTemplateOutlet} from "@angular/common";
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent<T> implements AfterViewInit {
+export class TableComponent<T> {
   public dataSource = input<T[]>([]);
   public columns = input<TableColumn<T>[]>([]);
 
-  public customCells = signal<CustomCells>({});
+  private cellsList = contentChildren<TableColumnCellDirective>(TableColumnCellDirective);
 
-  @ContentChildren(TableColumnCellDirective) cellsQueryList!: QueryList<TableColumnCellDirective>;
+  public customCells = computed(() => this.generateCustomCellsFromCellsList(this.cellsList()))
 
-  ngAfterViewInit() {
-    this.customCells.update(() => this.generateCustomCellsFromCellsQueryList(this.cellsQueryList));
-  }
-
-  private generateCustomCellsFromCellsQueryList(cellsQueryList: QueryList<TableColumnCellDirective>): CustomCells {
-    return this.cellsQueryList.reduce((previous, current) => {
+  private generateCustomCellsFromCellsList(cellsQueryList: readonly TableColumnCellDirective[]): CustomCells {
+    return cellsQueryList.reduce((previous, current) => {
       return ({...previous, [current.column]: current.templateRef})
     }, {});
   }

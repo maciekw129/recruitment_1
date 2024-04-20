@@ -12,3 +12,6 @@ export enum Position {
   Manager = 'Manager'
 }
 
+export interface EmployeesState {
+  employees: Employee[];
+}

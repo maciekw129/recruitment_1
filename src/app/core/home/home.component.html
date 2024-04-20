@@ -1,4 +1,4 @@
-<app-table [columns]="columns" [dataSource]="dataSource">
+<app-table [columns]="columns" [dataSource]="employees()">
   <ng-template appTableColumnCell column="isFullTime" let-row="row">
     {{row.isFullTime ? 'Tak' : 'Nie'}}
   </ng-template>

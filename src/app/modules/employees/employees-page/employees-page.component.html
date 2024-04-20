@@ -1,0 +1,13 @@
+<section class="employees-page">
+  <h2>Pracownicy:</h2>
+
+  <app-table [columns]="columns" [dataSource]="employees()">
+    <ng-template appTableColumnCell column="isFullTime" let-row="row">
+      {{row.isFullTime ? 'Tak' : 'Nie'}}
+    </ng-template>
+  </app-table>
+
+  <div class="employees-page__button-wrapper">
+    <app-button (buttonClicked)="navigateToCreateEmployee()" content="Dodaj pracownika"/>
+  </div>
+</section>

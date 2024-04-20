@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-3);
+
+  .employees-page {
+    display: grid;
+    row-gap: var(--space-2);
+
+    &__button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

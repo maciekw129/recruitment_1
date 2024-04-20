@@ -1,5 +1,5 @@
-import {TableColumn} from "../../shared/components/table/table.model";
-import {Employee} from "../../modules/employees/employees.model";
+import {TableColumn} from "../../../shared/components/table/table.model";
+import {Employee} from "../employees.model";
 
 export const COLUMNS: TableColumn<Employee>[] = [
   {

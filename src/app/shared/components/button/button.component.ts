@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, input, Output, output} from '@angular/core';
 import {UpperCasePipe} from "@angular/common";
 
 @Component({
@@ -13,5 +13,6 @@ import {UpperCasePipe} from "@angular/common";
 })
 export class ButtonComponent {
   public content = input.required<string>();
-  public callback = input<() => {}>();
+
+  @Output() buttonClicked = new EventEmitter<void>();
 }

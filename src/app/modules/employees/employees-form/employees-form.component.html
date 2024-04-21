@@ -9,6 +9,7 @@
     />
     <app-field-number
       formControlName="age"
+      [validationErrors]="validationErrors.age"
       label="Wiek pracownika"
       placeholder="Wpisz wiek pracownika"
       [decimalPlaces]="0"

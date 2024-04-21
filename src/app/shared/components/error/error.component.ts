@@ -11,8 +11,12 @@ import { VALIDATION_ERRORS } from "./error.tokens";
 })
 export class ErrorComponent {
   public error = input<string>('');
+  public validationErrors = input<Record<string, string>>({});
 
-  private readonly validationErrors = inject(VALIDATION_ERRORS);
+  private readonly defaultValidationErrors = inject(VALIDATION_ERRORS);
 
-  public errorText = computed(() => this.validationErrors[this.error()] ?? this.validationErrors['default'])
+  public errorText = computed(() => {
+    const combinedValidationErrors = {...this.validationErrors(), ...this.defaultValidationErrors};
+    return combinedValidationErrors[this.error()] ?? combinedValidationErrors['default'];
+  })
 }

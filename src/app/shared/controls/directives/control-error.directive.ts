@@ -4,6 +4,7 @@ import {
   Directive,
   HostListener,
   inject,
+  input,
   OnInit,
   ViewContainerRef
 } from '@angular/core';
@@ -18,6 +19,8 @@ import {FormSubmitDirective} from "./form-submit.directive";
   standalone: true,
 })
 export class ControlErrorDirective implements OnInit {
+  public validationErrors = input<Record<string, string>>({});
+
   private errorComponent!: ComponentRef<ErrorComponent>;
 
   private readonly control = inject(FormControlDirective);
@@ -48,6 +51,7 @@ export class ControlErrorDirective implements OnInit {
 
   private instantiateErrorComponent(): void {
     this.errorComponent = this.viewContainerRef.createComponent(ErrorComponent);
+    this.errorComponent.setInput('validationErrors', this.validationErrors());
   }
 
   private updateErrorMessage(status: FormControlStatus): void {

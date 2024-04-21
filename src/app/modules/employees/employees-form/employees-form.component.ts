@@ -6,7 +6,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import {OPTIONS, TITLE} from "./employees-form.data";
+import {LIMIT, OPTIONS, TITLE, VALIDATION_ERRORS} from "./employees-form.data";
 import {ActivatedRoute, Router} from "@angular/router";
 import {tap} from "rxjs";
 import {EmployeesFormControls, EmployeesFormResolveData} from "./employees-form.model";
@@ -44,8 +44,11 @@ export class EmployeesFormComponent implements OnInit {
   private readonly employeesStateService = inject(EmployeesStateService);
   private readonly router = inject(Router);
 
-  public form = this.buildForm();
   public readonly options = OPTIONS;
+  public readonly limit = LIMIT;
+  public readonly validationErrors = VALIDATION_ERRORS;
+
+  public form: FormGroup<EmployeesFormControls> = this.buildForm();
 
   public readonly title = signal<string>('');
 
@@ -66,7 +69,7 @@ export class EmployeesFormComponent implements OnInit {
     return this.fb.group<EmployeesFormControls>({
       id: this.fb.control(crypto.randomUUID()),
       name: this.fb.control('', {validators: Validators.required}),
-      age: this.fb.control(null, {validators: Validators.required}),
+      age: this.fb.control(null, {validators: [Validators.required, Validators.min(this.limit.age.min)]}),
       isFullTime: this.fb.control(false),
       position: this.fb.control(null, {validators: Validators.required})
     })

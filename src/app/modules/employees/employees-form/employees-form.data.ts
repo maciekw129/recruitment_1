@@ -15,3 +15,15 @@ export const OPTIONS: EmployeesFormOptions = {
     {value: Position.MANAGER, label: POSITION_LABELS.MANAGER}
   ]
 }
+
+export const LIMIT = {
+  age: {
+    min: 18
+  }
+}
+
+export const VALIDATION_ERRORS = {
+  age: {
+    min: 'Pracownik musi mieć minimum 18 lat'
+  }
+}

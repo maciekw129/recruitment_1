@@ -1,0 +1,21 @@
+:host {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-3) 0;
+
+  .employees-form {
+    display: grid;
+    row-gap: var(--space-6);
+
+    &__controls {
+      display: grid;
+      row-gap: var(--space-3);
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

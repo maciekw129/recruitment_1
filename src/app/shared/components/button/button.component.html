@@ -1,1 +1,1 @@
-<button class="button" (click)="buttonClicked.emit()">{{content() | uppercase}}</button>
+<button class="button" [type]="type()" (click)="buttonClicked.emit()">{{content() | uppercase}}</button>

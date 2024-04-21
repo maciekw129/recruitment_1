@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {FormControlAbstract} from "../form-control.abstract";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ControlErrorDirective} from "../control-error.directive";
+import {ControlErrorDirective} from "../directives/control-error.directive";
 
 @Component({
   selector: 'app-field-text',

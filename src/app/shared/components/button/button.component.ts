@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, input, Output, output} from '@angular/core';
 import {UpperCasePipe} from "@angular/common";
+import {ButtonTypes} from "./button.model";
 
 @Component({
   selector: 'app-button',
@@ -13,6 +14,7 @@ import {UpperCasePipe} from "@angular/common";
 })
 export class ButtonComponent {
   public content = input.required<string>();
+  public type = input<ButtonTypes>('button');
 
   @Output() buttonClicked = new EventEmitter<void>();
 }

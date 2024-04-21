@@ -9,8 +9,9 @@ import {
 } from '@angular/core';
 import { FormControlDirective, FormControlStatus } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest, defer, startWith, Subject, tap } from 'rxjs';
-import { ErrorComponent } from "../components/error/error.component";
+import {combineLatest, defer, distinctUntilChanged, filter, merge, startWith, Subject, tap} from 'rxjs';
+import { ErrorComponent } from "../../components/error/error.component";
+import {FormSubmitDirective} from "./form-submit.directive";
 
 @Directive({
   selector: '[formControl]',
@@ -20,23 +21,29 @@ export class ControlErrorDirective implements OnInit {
   private errorComponent!: ComponentRef<ErrorComponent>;
 
   private readonly control = inject(FormControlDirective);
+  private readonly formSubmitDirective = inject(FormSubmitDirective);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly destroyRef = inject(DestroyRef);
 
   @HostListener('blur') listenOnBlur() {
-    this.blurEvent$.next();
+    this.initializeErrorState$.next();
   }
 
-  private blurEvent$ = new Subject<void>();
+  private initializeErrorState$ = new Subject<void>();
 
-  private listenControlStatusChange$ = defer(() => combineLatest([this.control.statusChanges!.pipe(startWith(this.control.status)), this.blurEvent$]).pipe(
-    takeUntilDestroyed(this.destroyRef),
+  private listenFormSubmit$ = defer(() => this.formSubmitDirective.formSubmit$.pipe(
+    tap(() => this.initializeErrorState$.next())
+  ));
+
+  private listenControlStatusChange$ = defer(() => combineLatest([this.control.statusChanges!.pipe(startWith(this.control.status)), this.initializeErrorState$]).pipe(
+    filter(() => Boolean(this.control.touched)),
+    distinctUntilChanged((previous, current) => JSON.stringify(previous) === JSON.stringify(current)),
     tap(([status]) => this.updateErrorMessage(status)),
   ))
 
   ngOnInit(): void {
     this.instantiateErrorComponent();
-    this.listenControlStatusChange$.subscribe();
+    merge(this.listenFormSubmit$, this.listenControlStatusChange$).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   private instantiateErrorComponent(): void {

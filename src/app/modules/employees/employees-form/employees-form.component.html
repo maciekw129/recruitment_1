@@ -1,3 +1,33 @@
-<form>
+<form [formGroup]="form" class="employees-form" (ngSubmit)="submit()">
+  <h2>{{title()}}</h2>
 
+  <div class="employees-form__controls">
+    <app-field-text
+      formControlName="name"
+      label="Imię pracownika"
+      placeholder="Wpisz imię pracownika"
+    />
+    <app-field-number
+      formControlName="age"
+      label="Wiek pracownika"
+      placeholder="Wpisz wiek pracownika"
+      [decimalPlaces]="0"
+      separatorLimit="100"
+    />
+    <app-checkbox
+      formControlName="isFullTime"
+      label="Pełny etat"
+    />
+    <app-field-select
+      formControlName="position"
+      label="Stanowisko"
+      placeholder="Wybierz stanowisko"
+      [options]="options.position"
+    />
+  </div>
+
+  <div class="employees-form__buttons">
+    <app-button content="Anuluj" (buttonClicked)="navigateBack()"/>
+    <app-button content="Zatwierdź" type="submit"/>
+  </div>
 </form>

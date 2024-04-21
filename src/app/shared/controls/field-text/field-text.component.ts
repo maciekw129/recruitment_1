@@ -11,7 +11,6 @@ import {ControlErrorDirective} from "../control-error.directive";
     ControlErrorDirective
   ],
   templateUrl: './field-text.component.html',
-  styleUrl: './field-text.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FieldTextComponent extends FormControlAbstract<string>{}

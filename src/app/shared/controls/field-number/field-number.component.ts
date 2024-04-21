@@ -16,6 +16,7 @@ import {ControlErrorDirective} from "../control-error.directive";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FieldNumberComponent extends FormControlAbstract<number>{
+  public placeholder = input<string>('');
   public decimalPlaces = input<number>(2);
   public separatorLimit = input<string>('');
 

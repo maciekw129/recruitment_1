@@ -10,7 +10,6 @@ export abstract class FormControlAbstract<T> implements ControlValueAccessor, On
   }
 
   public label = input<string>('');
-  public placeholder = input<string>('');
 
   public formControl!: FormControl<T>;
   public id = FormControlAbstract.generateControlId();

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {FormControlAbstract} from "../form-control.abstract";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ControlErrorDirective} from "../control-error.directive";
@@ -13,4 +13,6 @@ import {ControlErrorDirective} from "../control-error.directive";
   templateUrl: './field-text.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FieldTextComponent extends FormControlAbstract<string>{}
+export class FieldTextComponent extends FormControlAbstract<string>{
+  public placeholder = input<string>('');
+}

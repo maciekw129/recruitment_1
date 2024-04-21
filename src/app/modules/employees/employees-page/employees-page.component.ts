@@ -5,6 +5,8 @@ import {TableComponent} from "../../../shared/components/table/table.component";
 import {EmployeesStateService} from "../employees-state.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {COLUMNS} from "./employees-page.data";
+import {PositionLabelPipe} from "../pipes/position-label.pipe";
+import {BooleanLabelPipe} from "../../../shared/pipes/boolean-label.pipe";
 
 @Component({
   selector: 'app-employees-page',
@@ -12,7 +14,9 @@ import {COLUMNS} from "./employees-page.data";
   imports: [
     ButtonComponent,
     TableColumnCellDirective,
-    TableComponent
+    TableComponent,
+    PositionLabelPipe,
+    BooleanLabelPipe
   ],
   templateUrl: './employees-page.component.html',
   styleUrl: './employees-page.component.scss'

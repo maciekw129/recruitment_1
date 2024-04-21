@@ -1,9 +1,13 @@
 <section class="employees-page">
-  <h2>Pracownicy:</h2>
+  <h2 class="red">Pracownicy:</h2>
 
   <app-table [columns]="columns" [dataSource]="employees()">
     <ng-template appTableColumnCell column="isFullTime" let-row="row">
-      {{row.isFullTime ? 'Tak' : 'Nie'}}
+      {{ row.isFullTime | booleanLabel }}
+    </ng-template>
+
+    <ng-template appTableColumnCell column="position" let-row="row">
+      {{ row.position | positionLabel }}
     </ng-template>
   </app-table>
 

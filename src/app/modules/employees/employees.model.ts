@@ -6,10 +6,10 @@ export interface Employee {
 }
 
 export enum Position {
-  Junior = 'Junior',
-  Mid = 'Mid',
-  Senior = 'Senior',
-  Manager = 'Manager'
+  JUNIOR = 'JUNIOR',
+  MID = 'MID',
+  SENIOR = 'SENIOR',
+  MANAGER = 'MANAGER'
 }
 
 export interface EmployeesState {

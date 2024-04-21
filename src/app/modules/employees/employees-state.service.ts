@@ -8,7 +8,7 @@ export class EmployeesStateService {
       name: 'Maciej Walecki',
       age: 24,
       isFullTime: true,
-      position: Position.Junior
+      position: Position.JUNIOR
     }]
   })
 

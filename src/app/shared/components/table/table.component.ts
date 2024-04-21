@@ -5,7 +5,7 @@ import {
   contentChildren,
   input,
 } from '@angular/core';
-import {CustomCells, TableColumn} from "./table.model";
+import {CustomCells, RowActions, TableColumn} from "./table.model";
 import {TableColumnCellDirective} from "./table-column-cell.directive";
 import {NgTemplateOutlet} from "@angular/common";
 
@@ -22,6 +22,7 @@ import {NgTemplateOutlet} from "@angular/common";
 export class TableComponent<T> {
   public dataSource = input<T[]>([]);
   public columns = input<TableColumn<T>[]>([]);
+  public actions = input<RowActions<T>[]>([]);
 
   private cellsList = contentChildren<TableColumnCellDirective>(TableColumnCellDirective);
 

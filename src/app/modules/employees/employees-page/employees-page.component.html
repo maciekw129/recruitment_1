@@ -1,7 +1,7 @@
 <section class="employees-page">
   <h2 class="red">Pracownicy:</h2>
 
-  <app-table [columns]="columns" [dataSource]="employees()">
+  <app-table [columns]="columns" [actions]="actions" [dataSource]="employees()">
     <ng-template appTableColumnCell column="isFullTime" let-row="row">
       {{ row.isFullTime | booleanLabel }}
     </ng-template>

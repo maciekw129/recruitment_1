@@ -20,6 +20,11 @@
                 }
               </td>
             }
+            <td>
+              @for(action of actions(); track action) {
+                <button (click)="action.action(row)">{{action.label}}</button>
+              }
+            </td>
           </tr>
         }
       } @else {

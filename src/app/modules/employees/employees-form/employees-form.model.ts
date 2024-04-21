@@ -1,4 +1,4 @@
-import {Position} from "../employees.model";
+import {Employee, Position} from "../employees.model";
 import {FormControl} from "@angular/forms";
 import {SelectOption} from "../../../shared/controls/field-select/field-select.model";
 
@@ -11,7 +11,8 @@ export interface EmployeesFormControls {
 }
 
 export interface EmployeesFormResolveData {
-  mode: FormMode
+  mode: FormMode,
+  employee: Employee
 }
 
 export interface EmployeesFormOptions {

@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, computed,
   DestroyRef,
   inject,
   OnInit,
@@ -9,7 +9,7 @@ import {
 import {LIMIT, OPTIONS, TITLE, VALIDATION_ERRORS} from "./employees-form.data";
 import {ActivatedRoute, Router} from "@angular/router";
 import {tap} from "rxjs";
-import {EmployeesFormControls, EmployeesFormResolveData} from "./employees-form.model";
+import {EmployeesFormControls, EmployeesFormResolveData, FormMode} from "./employees-form.model";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {FieldTextComponent} from "../../../shared/controls/field-text/field-text.component";
 import {FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -50,14 +50,20 @@ export class EmployeesFormComponent implements OnInit {
 
   public form: FormGroup<EmployeesFormControls> = this.buildForm();
 
-  public readonly title = signal<string>('');
+  public readonly mode = signal<FormMode | null>(null);
+
+  public readonly title = computed(() => {
+    const mode = this.mode();
+    return mode !== null ? TITLE[mode] : '';
+  })
 
   private readonly resolve$ = this.activatedRoute.data.pipe(
     takeUntilDestroyed(this.destroyRef),
     tap((data) => {
-      const {mode} = data as EmployeesFormResolveData;
+      const {mode, employee} = data as EmployeesFormResolveData;
 
-      this.title.set(TITLE[mode]);
+      this.mode.set(mode);
+      this.form.patchValue(employee);
     })
   )
 
@@ -80,9 +86,9 @@ export class EmployeesFormComponent implements OnInit {
       return
     }
 
-    const newEmployee = this.form.getRawValue() as Employee;
+    const employee = this.form.getRawValue() as Employee;
 
-    this.employeesStateService.addEmployee(newEmployee);
+    this.mode() === FormMode.CREATE ? this.employeesStateService.addEmployee(employee) : this.employeesStateService.editEmployee(employee);
     this.navigateBack();
   }
 

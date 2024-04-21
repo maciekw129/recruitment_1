@@ -33,8 +33,16 @@ export class EmployeesPageComponent {
 
   public readonly actions: RowActions<Employee>[] = [
     {
-      label: 'Edytuj',
+      icon: 'edit',
       action: ({id}) => this.navigateToEditEmployee(id)
+    },
+    {
+      icon: 'delete',
+      action: ({id}) => {
+        if(confirm("Czy na pewno chcesz usunąć pracownika?")) {
+          this.employeesStateService.removeEmployee(id);
+        }
+      }
     }
   ]
 

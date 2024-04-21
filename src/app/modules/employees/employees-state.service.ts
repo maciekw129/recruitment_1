@@ -34,6 +34,13 @@ export class EmployeesStateService {
     this.patchState({employees: employees});
   }
 
+  public removeEmployee(id: string): void {
+    const employees = this.getAllEmployees()();
+    const filtered = employees.filter(employee => employee.id !== id);
+
+    this.patchState({employees: filtered});
+  }
+
   private getStateSlice<K extends keyof EmployeesState>(key: K): Signal<EmployeesState[K]> {
     return computed(() => this._state()[key]);
   }

@@ -6,7 +6,7 @@ export interface TableColumn<T> {
 }
 
 export interface RowActions<T> {
-  label: string,
+  icon: string,
   action: (row: T) => any,
 }
 

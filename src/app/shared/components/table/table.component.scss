@@ -1,6 +1,5 @@
 .table {
   border-collapse: collapse;
-  border: 1px solid var(--gray-color-200);
 
   &__data, &__heading {
     border: 1px solid var(--gray-color-100);
@@ -13,8 +12,27 @@
     text-transform: uppercase;
   }
 
+  &__actions {
+
+  }
+
+  &__action {
+    background-color: unset;
+    border: 1px solid var(--primary-color-500);
+    cursor: pointer;
+    padding: var(--space-1);
+    margin: var(--space-1);
+    border-radius: 50%;
+
+    &:hover {
+      background-color: var(--primary-color-500);
+      transition: background-color 0.2s linear;
+    }
+  }
+
   &__empty-text {
     width: 100%;
     text-align: center;
+    border: 1px solid var(--gray-color-200);
   }
 }

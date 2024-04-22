@@ -11,7 +11,7 @@ export const COLUMNS: TableColumn<Employee>[] = [
     property: 'age'
   },
   {
-    label: 'Zatrudniony na pełny etat',
+    label: 'Pełny etat',
     property: 'isFullTime'
   },
   {

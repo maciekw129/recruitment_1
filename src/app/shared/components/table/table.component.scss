@@ -12,10 +12,6 @@
     text-transform: uppercase;
   }
 
-  &__actions {
-
-  }
-
   &__action {
     background-color: unset;
     border: 1px solid var(--primary-color-500);
@@ -34,5 +30,34 @@
     width: 100%;
     text-align: center;
     border: 1px solid var(--gray-color-200);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .table {
+    border: 0;
+
+    &__head {
+      display: none;
+    }
+
+    &__data {
+      display: block;
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-2);
+    }
+
+    &__data::before {
+      content: attr(title);
+      float: left;
+      font-weight: bold;
+      margin-right: var(--space-3)
+    }
   }
 }

@@ -1,5 +1,5 @@
 <table class="table">
-  <thead>
+  <thead class="table__head">
     <tr class="table__row">
       @for (column of columns(); track column) {
         <th class="table__heading">{{column.label}}</th>
@@ -12,7 +12,7 @@
         @for (row of data.dataSource; track row) {
           <tr class="table__row">
             @for (column of data.columns; track column) {
-              <td class="table__data">
+              <td [title]="column.label" class="table__data">
                 @if (customCells()[column.property]; as customCellTemplate) {
                   <ng-container [ngTemplateOutlet]="customCellTemplate" [ngTemplateOutletContext]="{row: row}"/>
                 } @else {

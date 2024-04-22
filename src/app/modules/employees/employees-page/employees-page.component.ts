@@ -9,6 +9,7 @@ import {PositionLabelPipe} from "../pipes/position-label.pipe";
 import {BooleanLabelPipe} from "../../../shared/pipes/boolean-label.pipe";
 import {RowActions} from "../../../shared/components/table/table.model";
 import {Employee} from "../employees.model";
+import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-employees-page',
@@ -46,7 +47,7 @@ export class EmployeesPageComponent {
     }
   ]
 
-  public readonly employees = this.employeesStateService.getAllEmployees();
+  public readonly employees = toSignal(this.employeesStateService.getAllEmployees(), {initialValue: []});
 
   public navigateToCreateEmployee(): void {
     this.router.navigate(['dodaj'], {relativeTo: this.activatedRoute});

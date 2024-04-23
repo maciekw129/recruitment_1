@@ -1,1 +1,11 @@
-<button class="button" [type]="type()" (click)="buttonClicked.emit()">{{content() | uppercase}}</button>
+<button
+  class="button"
+  [ngClass]="{'button--icon': isIconButton()}"
+  [type]="type()"
+  (click)="buttonClicked.emit()"
+>@if(isIconButton()) {
+  <span class="material-symbols-outlined">{{icon()}}</span>
+} @else {
+  {{content() | uppercase}}
+}
+</button>

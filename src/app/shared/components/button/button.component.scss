@@ -4,9 +4,17 @@
   border: 1.5px solid var(--primary-color-400);
   border-radius: 5px;
 
+  &--icon {
+    border-radius: 50%;
+    padding: var(--space-1);
+    font-size: 0.8rem;
+  }
+
   &:hover {
     cursor: pointer;
     background-color: var(--primary-color-400);
     transition: background-color 0.2s linear;
   }
 }
+
+

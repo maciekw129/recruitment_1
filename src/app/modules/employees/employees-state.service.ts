@@ -6,7 +6,7 @@ import {BehaviorSubject, map, Observable} from "rxjs";
 export class EmployeesStateService {
   private readonly _state = new BehaviorSubject<EmployeesState>({
     employees: [{
-      id: '1',
+      id: crypto.randomUUID(),
       name: 'Maciej Walecki',
       age: 24,
       isFullTime: true,

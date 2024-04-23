@@ -1,0 +1,27 @@
+<div class="editable-cell" (click)="setEditMode(true)">
+  @if (isEditMode()) {
+    <form [formGroup]="form" (ngSubmit)="submit()" class="editable-cell__edit">
+      @switch (controlType()) {
+        @case ('text') {
+          <app-field-text formControlName="value"/>
+        }
+        @case ('number') {
+          <app-field-number [separatorLimit]="separatorLimit()" formControlName="value"/>
+        }
+        @case ('select') {
+          <app-field-select formControlName="value" [options]="options()"/>
+        }
+      }
+      <div class="editable-cell__buttons">
+        <app-button (click)="setEditMode(false); $event.stopPropagation()" icon="close"/>
+        <app-button type="submit" icon="done"/>
+      </div>
+    </form>
+  } @else {
+    @if(readonlyTemplate()) {
+      <ng-container *ngTemplateOutlet="readonlyTemplate()"></ng-container>
+    } @else {
+      {{value()}}
+    }
+  }
+</div>

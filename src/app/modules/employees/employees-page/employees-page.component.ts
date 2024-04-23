@@ -10,6 +10,9 @@ import {BooleanLabelPipe} from "../../../shared/pipes/boolean-label.pipe";
 import {RowActions} from "../../../shared/components/table/table.model";
 import {Employee} from "../employees.model";
 import {toSignal} from "@angular/core/rxjs-interop";
+import {EditableCellComponent} from "../../../shared/components/table/editable-cell/editable-cell.component";
+import {OPTIONS} from "../employees-form/employees-form.data";
+import {EmployeesFormValidators} from "../employees-form/employees-form.validators";
 
 @Component({
   selector: 'app-employees-page',
@@ -19,7 +22,8 @@ import {toSignal} from "@angular/core/rxjs-interop";
     TableColumnCellDirective,
     TableComponent,
     PositionLabelPipe,
-    BooleanLabelPipe
+    BooleanLabelPipe,
+    EditableCellComponent
   ],
   templateUrl: './employees-page.component.html',
   styleUrl: './employees-page.component.scss',
@@ -31,6 +35,9 @@ export class EmployeesPageComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
 
   public readonly columns = COLUMNS;
+  public readonly options = OPTIONS;
+
+  public readonly minLengthValidator = EmployeesFormValidators.minAgeValidator();
 
   public readonly actions: RowActions<Employee>[] = [
     {
@@ -46,6 +53,10 @@ export class EmployeesPageComponent {
       }
     }
   ]
+
+  public handleEditCell(row: Employee, column: string, value: any) {
+    this.employeesStateService.editEmployee({...row, [column]: value});
+  }
 
   public readonly employees = toSignal(this.employeesStateService.getAllEmployees(), {initialValue: []});
 

@@ -20,6 +20,7 @@ import {ButtonComponent} from "../../../shared/components/button/button.componen
 import {FormSubmitDirective} from "../../../shared/controls/directives/form-submit.directive";
 import {EmployeesStateService} from "../employees-state.service";
 import {Employee} from "../employees.model";
+import {EmployeesFormValidators} from "./employees-form.validators";
 
 @Component({
   selector: 'app-employees-form',
@@ -75,7 +76,7 @@ export class EmployeesFormComponent implements OnInit {
     return this.fb.group<EmployeesFormControls>({
       id: this.fb.control(crypto.randomUUID()),
       name: this.fb.control('', {validators: Validators.required}),
-      age: this.fb.control(null, {validators: [Validators.required, Validators.min(this.limit.age.min)]}),
+      age: this.fb.control(null, {validators: [Validators.required, EmployeesFormValidators.minAgeValidator()]}),
       isFullTime: this.fb.control(false),
       position: this.fb.control(null, {validators: Validators.required})
     })

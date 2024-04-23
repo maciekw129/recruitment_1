@@ -1,0 +1,8 @@
+.editable-cell {
+  cursor: pointer;
+
+  &__edit, &__buttons {
+    display: flex;
+    column-gap: var(--space-1);
+  }
+}

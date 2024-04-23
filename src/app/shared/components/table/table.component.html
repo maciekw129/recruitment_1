@@ -22,9 +22,7 @@
             }
             <td class="table__actions">
               @for(action of actions(); track action) {
-                <button class="table__action" (click)="action.action(row)">
-                  <span class="material-symbols-outlined">{{action.icon}}</span>
-                </button>
+                <app-button [icon]="action.icon" (buttonClicked)="action.action(row)" />
               }
             </td>
           </tr>

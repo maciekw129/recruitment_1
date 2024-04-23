@@ -8,12 +8,14 @@ import {
 import {CustomCells, RowActions, TableColumn} from "./table.model";
 import {TableColumnCellDirective} from "./table-column-cell.directive";
 import {NgTemplateOutlet} from "@angular/common";
+import {ButtonComponent} from "../button/button.component";
 
 @Component({
   selector: 'app-table',
   standalone: true,
   imports: [
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    ButtonComponent
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',

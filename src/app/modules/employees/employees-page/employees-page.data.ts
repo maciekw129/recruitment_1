@@ -18,4 +18,4 @@ export const COLUMNS: TableColumn<Employee>[] = [
     label: 'Stanowisko',
     property: 'position'
   }
-]
+];

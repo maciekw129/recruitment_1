@@ -2,28 +2,37 @@
   <h2 class="red">Pracownicy:</h2>
 
   <app-table [columns]="columns" [actions]="actions" [dataSource]="employees()">
+
+    <ng-template appTableColumnCell column="name" let-row="row">
+      <app-editable-cell (valueChange)="handleEditCell(row,'name', $event)" [value]="row.name"/>
+    </ng-template>
+
+    <ng-template appTableColumnCell column="age" let-row="row">
+      <app-editable-cell
+        controlType="number"
+        (valueChange)="handleEditCell(row,'age', $event)"
+        [value]="row.age"
+        [validators]="[minLengthValidator]"
+        separatorLimit="99"
+      />
+    </ng-template>
+
     <ng-template appTableColumnCell column="isFullTime" let-row="row">
       {{ row.isFullTime | booleanLabel }}
     </ng-template>
 
     <ng-template appTableColumnCell column="position" let-row="row">
-      {{ row.position | positionLabel }}
+      <app-editable-cell
+        controlType="select"
+        [options]="options.position"
+        (valueChange)="handleEditCell(row,'position', $event)"
+        [value]="row.position"
+        [readonlyTemplate]="positionReadonly"
+      />
+      <ng-template #positionReadonly>{{ row.position | positionLabel }}</ng-template>
     </ng-template>
+
   </app-table>
 
-  <div class="employees-page__button-wrapper">
-    <app-button (buttonClicked)="navigateToCreateEmployee()" content="Dodaj pracownika"/>
-  </div>
+  <app-button (buttonClicked)="navigateToCreateEmployee()" content="Dodaj pracownika"/>
 </section>
-
-
-
-<dialog #confirmationDialog>
-  <div>
-    <h2>Potwierdź</h2>
-    <p>Czy na pewno chcesz usunąć pracownika?</p>
-  </div>
-  <div>
-    <app-button content="Zamknij" (buttonClicked)="confirmationDialog.close()"/>
-  </div>
-</dialog>
